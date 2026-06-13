@@ -30,9 +30,26 @@ class BinaryCrossEntropy(Loss):
         y_pred_clipped = np.clip(y_pred, 1e-7, 1 - 1e-7)
 
         # Binary cross-entropy formula
-        smaple_losses = -(y_true * np.log(y_pred_clipped) + (1 - y_true) * np.log(1 - y_pred_clipped))
+        sample_losses = -(y_true * np.log(y_pred_clipped) + (1 - y_true) * np.log(1 - y_pred_clipped))
 
-        return smaple_losses
+        return sample_losses
+    
+    def backward(self, dvalues, y_true):
+        # Number of samples
+        samples = len(dvalues)
+        
+        # Number of outputs in every sample
+        outputs = len(dvalues[0])
+
+        # Clip data to prevent division by 0
+        # Clip both sides to not drag mean towards any value
+        clipped_dvalues = np.clip(dvalues, 1e-7, 1 - 1e-7)
+
+        # Calculate gradient
+        self.dinputs = -(y_true / clipped_dvalues - (1 - y_true) / (1 - clipped_dvalues)) / outputs
+
+        # Normalize gradient across the batch
+        self.dinputs = self.dinputs / samples
     
 # Cross-entropy loss
 class CategoricalCrossEntropy(Loss):
@@ -67,6 +84,22 @@ class CategoricalCrossEntropy(Loss):
 
         return negative_log_likelihood
     
+    def backward(self, dvalues, y_true):
+        samples = len(dvalues)
+        labels = len(dvalues[0])
+
+        if len(y_true.shape) == 1:
+            y_true = np.eye(labels)[y_true]
+
+        # Clip data to prevent division by 0
+        clipped_dvalues = np.clip(dvalues, 1e-7, 1 - 1e-7)
+
+        # Calculate gradient using the clipped values
+        self.dinputs = -y_true / clipped_dvalues
+
+        # Normalize gradient across the batch
+        self.dinputs = self.dinputs / samples
+    
 # Cross-entropy loss
 class SparseCategoricalCrossEntropy(Loss):
 
@@ -89,3 +122,24 @@ class SparseCategoricalCrossEntropy(Loss):
         negative_log_likelihood = -np.log(correct_confidences)
         
         return negative_log_likelihood
+    
+
+class MeanSquaredError(Loss):
+
+    def forward(self, y_pred, y_true):
+        # Calculate loss
+        sample_losses = np.mean((y_true - y_pred)**2, axis=-1)
+        return sample_losses
+
+    def backward(self, dvalues, y_true):
+        # Number of samples
+        samples = len(dvalues)
+        
+        # Number of outputs in every sample
+        outputs = len(dvalues[0])
+
+        # Gradient on values
+        self.dinputs = -2 * (y_true - dvalues) / outputs
+
+        # Normalize gradient across the batch
+        self.dinputs = self.dinputs / samples

@@ -1,19 +1,5 @@
-import numpy as np 
-np.random.seed(42) 
-
-# class DenseLayer:
-
-#     def __init__(self, n_inputs, n_neurons):
-#         # Initialize weights and biases
-#         # In general, neural networks work best with values between -1 and +1
-#         self.weights = 0.01 * np.random.randn(n_inputs, n_neurons) # initialize weights randomly from Gaussian distribution, (already transposed, so don't need to take transpose each time)
-#         self.biases = np.zeros((1, n_neurons)) # 1 -> number of rows, n_neurons -> number of columns
-
-#     def forward(self, inputs):
-#         # Calculate output values from inputs, weights and biases
-#         self.output = np.dot(inputs, self.weights) + self.biases
-
 import numpy as np
+
 
 class DenseLayer:
     def __init__(self, n_inputs, n_neurons, *, activation='relu', init='auto',
@@ -76,5 +62,18 @@ class DenseLayer:
         self.output = None
 
     def forward(self, inputs):
+        # Remember inputs for backward pass
         self.inputs = inputs
         self.output = np.dot(inputs, self.weights) + self.biases
+
+    def backward(self, dvalues):
+        # Gradients on parameters
+        # self.inputs.T is the transposed inputs from the forward pass
+        self.dweights = np.dot(self.inputs.T, dvalues)
+
+        # np.sum with axis=0 calculates the sum of gradients for each bias
+        # keepdims=True ensures the output shape matches self.biases (1, n_neurons)
+        self.dbiases = np.sum(dvalues, axis=0, keepdims=True)
+
+        # Gradient on values to pass to the previous layer
+        self.dinputs = np.dot(dvalues, self.weights.T)
