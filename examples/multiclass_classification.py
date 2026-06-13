@@ -2,12 +2,12 @@ import numpy as np
 from sklearn.datasets import load_digits
 from sklearn.model_selection import train_test_split
 
-from layers import DenseLayer
-from activations import ReLU, Softmax
-from losses import CategoricalCrossEntropy
-from optimizers import Optimizer_Adam
-from model import Model
-from metrics import Accuracy, Precision, Recall, F1Score, ConfusionMatrix
+from vanillanets.layers import DenseLayer
+from vanillanets.activations import ReLU, Softmax
+from vanillanets.losses import CategoricalCrossEntropy
+from vanillanets.optimizers import Optimizer_Adam
+from vanillanets.model import Model
+from vanillanets.metrics import Accuracy, Precision, Recall, F1Score, ConfusionMatrix
 
 # 1. Load and prepare the data
 X, y = load_digits(return_X_y=True)

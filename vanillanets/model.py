@@ -1,7 +1,7 @@
 import numpy as np
-from activations import Softmax
-from losses import CategoricalCrossEntropy
-from softmax_loss import Activation_Softmax_Loss_CategoricalCrossentropy
+from vanillanets.activations import Softmax
+from vanillanets.losses import CategoricalCrossEntropy
+from vanillanets.softmax_loss import Activation_Softmax_Loss_CategoricalCrossentropy
 
 
 class Model:

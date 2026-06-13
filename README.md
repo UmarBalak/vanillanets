@@ -51,6 +51,54 @@ Whether you're a student learning fundamentals, a researcher prototyping new ide
 * Efficient NumPy vectorization throughout
 * Memory-conscious layer implementations
 
+---
+
+## Installation
+
+### From PyPI (Recommended)
+
+Install directly from PyPI:
+
+```bash
+pip install vanillanets
+```
+
+### From Source
+
+Clone the repository and install in development mode:
+
+```bash
+git clone https://github.com/UmarBalak/vanillanets.git
+cd vanillanets
+pip install -e .
+```
+
+Or install with development dependencies:
+
+```bash
+pip install -e ".[dev]"
+```
+
+### Requirements
+
+- **Python:** 3.8 or higher
+- **NumPy:** 2.3.3+ (for efficient numerical computation)
+
+### Verify Installation
+
+```python
+import vanillanets
+print(f"VanillaNets {vanillanets.__version__} installed successfully!")
+
+# Import core components
+from vanillanets import Model, DenseLayer
+from vanillanets.activations import ReLU, Sigmoid
+from vanillanets.losses import BinaryCrossEntropy
+from vanillanets.optimizers import Optimizer_Adam
+from vanillanets.metrics import Accuracy
+
+print("✓ All modules imported successfully!")
+```
 
 ---
 
@@ -59,12 +107,10 @@ Whether you're a student learning fundamentals, a researcher prototyping new ide
 ### Example 1: Binary Classification
 
 ```python
-from model import Model
-from layers import DenseLayer
-from activations import ReLU, Sigmoid
-from losses import BinaryCrossEntropy
-from optimizers import Optimizer_Adam
-from metrics import Accuracy
+from vanillanets import Model, DenseLayer, Optimizer_Adam
+from vanillanets.activations import ReLU, Sigmoid
+from vanillanets.losses import BinaryCrossEntropy
+from vanillanets.metrics import Accuracy
 
 # Build model
 model = Model()
@@ -96,8 +142,10 @@ predictions = model.predict(X_new)
 ### Example 2: Multiclass Classification
 
 ```python
-from activations import ReLU, Softmax
-from losses import CategoricalCrossEntropy
+from vanillanets import Model, DenseLayer, Optimizer_Adam
+from vanillanets.activations import ReLU, Softmax
+from vanillanets.losses import CategoricalCrossEntropy
+from vanillanets.metrics import Accuracy
 
 # Build model
 model = Model()
@@ -123,9 +171,10 @@ model.fit(X_train, y_train, epochs=50, print_every=5)
 ### Example 3: Regression
 
 ```python
-from activations import Linear, ReLU
-from losses import MeanSquaredError
-from metrics import RMSE, MAE
+from vanillanets import Model, DenseLayer, Optimizer_Adam
+from vanillanets.activations import Linear, ReLU
+from vanillanets.losses import MeanSquaredError
+from vanillanets.metrics import RMSE, MAE
 
 # Build model
 model = Model()
@@ -168,11 +217,18 @@ python regression.py
 
 ## Testing
 
-Run the comprehensive test suite (pytest required):
+Run the comprehensive test suite (requires pytest):
 
 ```bash
 pip install pytest
-pytest test_nn_lib.py -v
+pytest tests/ -v
+```
+
+Or run tests with coverage:
+
+```bash
+pip install pytest pytest-cov
+pytest tests/ -v --cov=vanillanets
 ```
 
 ### Test Coverage
@@ -264,7 +320,7 @@ If you use VanillaNets in your research or teaching, please cite:
   title={VanillaNets: A Transparent Neural Network Library},
   author={Umar Balak},
   year={2026},
-  url={https://github.com/UmarBalak/vanillanet-library}
+  url={https://github.com/UmarBalak/vanillanets}
 }
 ```
 
@@ -280,7 +336,6 @@ If you use VanillaNets in your research or teaching, please cite:
 
 ### Related Projects
 - [NumPy](https://numpy.org/) - Our computational foundation
-- [nnfs](https://github.com/nnaisense/nnfs) - Dataset utilities
 - [3blue1brown Neural Network Series](https://www.youtube.com/watch?v=aircAruvnKk) - Visual learning guide
 
 ---

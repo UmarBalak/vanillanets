@@ -3,12 +3,12 @@ from sklearn.datasets import load_breast_cancer
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 
-from layers import DenseLayer
-from activations import ReLU, Sigmoid
-from losses import BinaryCrossEntropy
-from optimizers import Optimizer_Adam
-from model import Model
-from metrics import Accuracy, Precision, Recall, F1Score
+from vanillanets.layers import DenseLayer
+from vanillanets.activations import ReLU, Sigmoid
+from vanillanets.losses import BinaryCrossEntropy
+from vanillanets.optimizers import Optimizer_Adam
+from vanillanets.model import Model
+from vanillanets.metrics import Accuracy, Precision, Recall, F1Score
 
 # 1. Load and prepare the data
 data = load_breast_cancer()

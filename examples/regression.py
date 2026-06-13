@@ -3,12 +3,12 @@ from sklearn.datasets import fetch_california_housing
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 
-from layers import DenseLayer
-from activations import ReLU, Linear
-from losses import MeanSquaredError
-from optimizers import Optimizer_Adam
-from model import Model
-from metrics import R2Score, MAE, RMSE
+from vanillanets.layers import DenseLayer
+from vanillanets.activations import ReLU, Linear
+from vanillanets.losses import MeanSquaredError
+from vanillanets.optimizers import Optimizer_Adam
+from vanillanets.model import Model
+from vanillanets.metrics import R2Score, MAE, RMSE
 
 # 1. Load and prepare the data
 X, y = fetch_california_housing(return_X_y=True)

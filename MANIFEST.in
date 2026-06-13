@@ -1,0 +1,23 @@
+# Include essential files
+include README.md
+include LICENSE
+include requirements.txt
+include MANIFEST.in
+
+# Include examples (for reference, not installed)
+recursive-include examples *.py
+
+# Exclude tests from distribution
+exclude tests
+recursive-exclude tests *
+
+# Exclude development/build artifacts
+exclude .gitignore
+exclude .github
+exclude .git
+exclude .pytest_cache
+exclude build
+exclude dist
+exclude *.egg-info
+exclude .venv
+exclude venv

@@ -14,23 +14,23 @@ Covers every class:
 - model.py         : Model (add/set/finalize/predict/evaluate/fit)
 
 Run with:
-    pytest test_nn_lib.py -v
+    pytest test_vanillanets.py -v
 """
 
 import numpy as np
 import pytest
 
-from activations import Linear, Sigmoid, ReLU, LeakyReLU, Tanh, Softmax
-from losses import (
+from vanillanets.activations import Linear, Sigmoid, ReLU, LeakyReLU, Tanh, Softmax
+from vanillanets.losses import (
     BinaryCrossEntropy,
     CategoricalCrossEntropy,
     SparseCategoricalCrossEntropy,
     MeanSquaredError,
 )
-from layers import DenseLayer
-from optimizers import Optimizer_SGD, Optimizer_Adam
-from softmax_loss import Activation_Softmax_Loss_CategoricalCrossentropy
-from metrics import (
+from vanillanets.layers import DenseLayer
+from vanillanets.optimizers import Optimizer_SGD, Optimizer_Adam
+from vanillanets.softmax_loss import Activation_Softmax_Loss_CategoricalCrossentropy
+from vanillanets.metrics import (
     Accuracy as MAccuracy,
     Precision,
     Recall,
@@ -40,8 +40,8 @@ from metrics import (
     MAE,
     RMSE,
 )
-from accuracy import Accuracy as LegacyAccuracy
-from model import Model
+from vanillanets.accuracy import Accuracy as LegacyAccuracy
+from vanillanets.model import Model
 
 
 # ---------------------------------------------------------------------------

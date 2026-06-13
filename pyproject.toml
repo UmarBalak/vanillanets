@@ -1,0 +1,73 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vanillanets"
+version = "1.0.0"
+description = "A transparent, NumPy-only neural network library for learning and experimentation."
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Umar Balak", email = "umarbalak35@gmail.com"},
+]
+keywords = [
+    "neural-network",
+    "deep-learning",
+    "machine-learning",
+    "numpy",
+    "education",
+    "from-scratch",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Education",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "numpy>=2.3.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/UmarBalak/vanillanets"
+Documentation = "https://github.com/UmarBalak/vanillanets#readme"
+Repository = "https://github.com/UmarBalak/vanillanets"
+"Bug Tracker" = "https://github.com/UmarBalak/vanillanets/issues"
+
+[tool.setuptools]
+packages = ["vanillanets"]
+
+[tool.setuptools.package-data]
+vanillanets = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short"
+
+[tool.black]
+line-length = 100
+target-version = ['py38']
+
+[tool.isort]
+profile = "black"
+line_length = 100
