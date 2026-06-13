@@ -3,6 +3,10 @@ import numpy as np
 # Common loss class
 class Loss:
 
+    """
+    Calculate mean loss between actual value and predicted value
+    """
+
     # Calculate the data and regularization losses given model output and ground truth values
     def calculate(self, output, y):
         # Calculate sample losses
@@ -27,6 +31,7 @@ class BinaryCrossEntropy(Loss):
 
         # Binary cross-entropy formula
         smaple_losses = -(y_true * np.log(y_pred_clipped) + (1 - y_true) * np.log(1 - y_pred_clipped))
+
         return smaple_losses
     
 # Cross-entropy loss
@@ -59,6 +64,7 @@ class CategoricalCrossEntropy(Loss):
 
         # Losses
         negative_log_likelihood = -np.log(correct_confidences)
+
         return negative_log_likelihood
     
 # Cross-entropy loss
@@ -81,4 +87,5 @@ class SparseCategoricalCrossEntropy(Loss):
 
         # Losses
         negative_log_likelihood = -np.log(correct_confidences)
+        
         return negative_log_likelihood

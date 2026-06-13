@@ -76,4 +76,5 @@ class DenseLayer:
         self.output = None
 
     def forward(self, inputs):
+        self.inputs = inputs
         self.output = np.dot(inputs, self.weights) + self.biases

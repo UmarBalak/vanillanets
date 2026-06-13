@@ -3,22 +3,26 @@ import numpy as np
 class Linear:
 
     def forward(self, inputs):
-        self.outputs = inputs
+        self.inputs = inputs
+        self.output = inputs
 
 class Sigmoid:
 
     def forward(self, inputs):
+        self.inputs = inputs
         self.output = 1 / (1 + np.exp(-inputs))
         
 class ReLU:
 
     def forward(self, inputs):
+        self.inputs = inputs
         self.output = np.maximum(0, inputs)
 
 class LeakyReLU:
 
     def forward(self, inputs):
-        self.outputs = np.where(inputs > 0, inputs, 0.1 * inputs)
+        self.inputs = inputs
+        self.output = np.where(inputs > 0, inputs, 0.1 * inputs)
 
 class Tanh:
     """
@@ -29,7 +33,7 @@ class Tanh:
 
     def forward(self, inputs):
         """
-        # self.outputs = (np.exp(inputs) - np.exp(-inputs)) / (np.exp(inputs) + np.exp(-inputs))
+        # self.output = (np.exp(inputs) - np.exp(-inputs)) / (np.exp(inputs) + np.exp(-inputs))
 
         # Manual formula for tanh works mathematically for small/typical inputs 
         # but produces nan for large values because np.exp(inputs) overflows (is too large for float storage), 
@@ -37,12 +41,14 @@ class Tanh:
         """
         
         # The objective is to utilize NumPy for implementing the neural network, rather than hardcoding operations using pure Python.
-
-        self.outputs = np.tanh(inputs)
+        self.inputs = inputs
+        self.output = np.tanh(inputs)
 
 class Softmax:
 
     def forward(self, inputs):
+        self.inputs = inputs
+        
         # Get unnormalized probabilities
         exp_values = np.exp(inputs - np.max(inputs, axis=1, keepdims=True)) # subtracting 'max value' to prevent the exponents values from becoming very large
 
