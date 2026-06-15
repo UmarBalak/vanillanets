@@ -1,4 +1,4 @@
-# VanillaNets v1.0.0
+# VanillaNets v1.0.1
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/downloads/)
 [![NumPy](https://img.shields.io/badge/dependency-numpy%202.3.3%2B-green)](https://numpy.org/)
