@@ -23,12 +23,12 @@ Whether you're a student learning fundamentals, a researcher prototyping new ide
 ### Activation Functions (with derivatives)
 * Linear, ReLU & LeakyReLU
 * Tanh & Sigmoid
-* Softmax (with fused Softmax+CrossEntropy backward pass optimization)
+* Softmax (with fused Softmax+CrossEntropy backward pass optimization, applies to both one-hot and integer labels)
 
 ### Loss Functions
 * Binary Cross-Entropy (for binary classification)
-* Categorical Cross-Entropy (for multiclass classification)
-* Sparse Categorical Cross-Entropy (for integer-encoded labels)
+* Categorical Cross-Entropy (for multiclass classification) - accepts one-hot or integer labels
+* Sparse Categorical Cross-Entropy (alias of Categorical Cross-Entropy, for users who prefer explicit integer-label naming)
 * Mean Squared Error (for regression)
 
 ### Optimizers
@@ -47,7 +47,7 @@ Whether you're a student learning fundamentals, a researcher prototyping new ide
 * Batch evaluation with `evaluate()`
 
 ### Performance Optimizations
-* Fused Softmax + Categorical Cross-Entropy backward pass (faster training)
+* Fused Softmax + Categorical Cross-Entropy backward pass (faster training) - works for `CategoricalCrossEntropy` and `SparseCategoricalCrossEntropy` alike
 * Efficient NumPy vectorization throughout
 * Memory-conscious layer implementations
 
@@ -235,7 +235,7 @@ pytest tests/ -v --cov=vanillanets
 
 Comprehensive unit and integration tests cover:
 - ✓ All activation functions (Linear, Sigmoid, ReLU, LeakyReLU, Tanh, Softmax) and their derivatives
-- ✓ All loss functions (BCE, CCE, SparseCCE, MSE) with gradient validation
+- ✓ All loss functions (BCE, CCE, SparseCCE, MSE) with gradient validation, including SparseCCE inheritance from CCE for both forward and backward
 - ✓ Dense layer forward/backward passes
 - ✓ Optimizer updates (SGD momentum, Adam adaptive rates)
 - ✓ Fused Softmax+CrossEntropy optimization
@@ -272,7 +272,7 @@ VanillaNets is built on the principle that **understanding requires transparency
 **Fully Implemented & Tested:**
 - ✓ Dense layer implementation with He, Xavier, normal, and uniform weight initialization
 - ✓ All activation functions with proper gradient computation (Linear, ReLU, LeakyReLU, Tanh, Sigmoid, Softmax)
-- ✓ All loss functions with backward passes (BCE, CCE, SparseCCE, MSE)
+- ✓ All loss functions with backward passes (BCE, CCE, SparseCCE, MSE) - SparseCCE is a thin subclass of CCE, sharing its forward/backward
 - ✓ SGD optimizer with momentum and learning rate decay
 - ✓ Adam optimizer with adaptive learning rates
 - ✓ Comprehensive metrics suite (Accuracy, Precision, Recall, F1, Confusion Matrix, R², MAE, RMSE)

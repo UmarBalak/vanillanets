@@ -101,28 +101,14 @@ class CategoricalCrossEntropy(Loss):
         self.dinputs = self.dinputs / samples
     
 # Cross-entropy loss
-class SparseCategoricalCrossEntropy(Loss):
-
-    def forward(self, y_pred, y_true):
-        """
-        Returns shape (n_samples,) after extracting correct_confidences
-
-        """
-
-        # Number of samples in a batch
-        samples = len(y_pred)
-
-        # Clip data to prevent division by 0
-        # Clip both sides to not drag mean towards any value
-        y_pred_clipped = np.clip(y_pred, 1e-7, 1 - 1e-7)
-
-        correct_confidences = np.array([y_pred_clipped[i, y_true[i]] for i in range(samples)])
-
-        # Losses
-        negative_log_likelihood = -np.log(correct_confidences)
+class SparseCategoricalCrossEntropy(CategoricalCrossEntropy):
+    """
+    Accepts integer class labels (y_true shape (n,)).
+    forward/backward inherited from CategoricalCrossEntropy, which
+    already branches on len(y_true.shape) == 1 for the sparse case.
+    """
+    pass
         
-        return negative_log_likelihood
-    
 
 class MeanSquaredError(Loss):
 

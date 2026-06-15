@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vanillanets"
-version = "1.0.0"
+version = "1.0.1"
 description = "A transparent, NumPy-only neural network library for learning and experimentation."
 readme = "README.md"
 requires-python = ">=3.8"

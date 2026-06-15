@@ -11,7 +11,7 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 
 setup(
     name="vanillanets",
-    version="1.0.0",
+    version="1.0.1",
     author="Umar Balak",
     author_email="umarbalak35@gmail.com",
     description="A transparent, NumPy-only neural network library for learning and experimentation.",
