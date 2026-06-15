@@ -267,7 +267,7 @@ VanillaNets is built on the principle that **understanding requires transparency
 
 ## Project Status
 
-### v1.0.0 - Production Ready
+### v1.0.1 - Production Ready
 
 **Fully Implemented & Tested:**
 - ✓ Dense layer implementation with He, Xavier, normal, and uniform weight initialization
